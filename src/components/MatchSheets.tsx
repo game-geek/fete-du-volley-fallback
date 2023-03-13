@@ -4,7 +4,7 @@ import db from "../firebase";
 import "../styles/style.css";
 
 const TeamLabel = ({ teamID }: any) => {
-  const [team, setTeam] = useState({}); // ! - champs a renseiger !!
+  const [team, setTeam] = useState({ name: "" }); // ! - champs a renseiger !!
 
   useEffect(
     () =>
@@ -14,7 +14,7 @@ const TeamLabel = ({ teamID }: any) => {
     []
   );
 
-  return <span>{team}</span>;
+  return <span>{team.name}</span>;
 };
 
 const MatchSheets = ({ poolID }: any) => {

@@ -1,8 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { API_KEY } from "./data";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD2NNpUFGt88AKCKOjZgH3j9af4KzafAh8",
+  apiKey: API_KEY,
   authDomain: "fete-du-volley.firebaseapp.com",
   projectId: "fete-du-volley",
   storageBucket: "fete-du-volley.appspot.com",
