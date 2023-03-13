@@ -1,0 +1,87 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+header {
+  background-color: darkgray;
+  display: inline-flex;
+  height: 110px;
+  width: 100%;
+}
+
+footer {
+  background-color: darkgrey;
+  display: inline-flex;
+  position: fixed;
+  height: 70px;
+  width: 100%;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+.button {
+  align-items: center;
+  background-color: antiquewhite;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  margin: 0.5rem 2.5rem;
+  padding: 1.25rem 1rem;
+  width: fit-content;
+}
+
+.button[aria-label="main"] {
+  display: inline-flex;
+  font-size: 1.5rem;
+  margin: 1.25rem 0;
+  width: 12.5rem;
+  word-spacing: 0.5rem;
+}
+
+.button[aria-label="header"] {
+  background-color: gray;
+}
+
+.card {
+  background-color: aliceblue;
+  border-color: grey;
+  border-radius: 1rem;
+  border-style: solid;
+  border-width: 2px;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  width: 200px;
+}
+
+.container {
+  align-items: center;
+  display: grid;
+  justify-items: center;
+}
+
+.container[aria-label="index"] {
+  min-height: calc(100vh - 180px);
+}
+
+.container[aria-label="pool-list"] {
+  grid-template-columns: 50vw 50vw;
+}
+
+.container[aria-label="match-label"] {
+  grid-template-columns: 50% 50%;
+}
+
+.container[aria-label="match-grid"] {
+  grid-template-columns: 25% 25% 25% 25%;
+}
+
+.form-element {
+  margin: 1rem 0;
+}
+
