@@ -16,7 +16,7 @@ const App: FC = () => (
         <Route index element={<Home />} />
         <Route path="pool-list" element={<PoolList />} />
         <Route path="rank" element={<Rank />} />
-        <Route path="match-sheet" element={<MatchSheet poolID="Poule_A" />} />
+        <Route path="match-sheet/:id" element={<MatchSheet />} />
         <Route path="final" element={<Final />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
