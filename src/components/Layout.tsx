@@ -1,5 +1,6 @@
 import { FC, Suspense } from "react";
 import { Link, Outlet } from "react-router-dom";
+import Loading from "./Loading";
 import "../styles/style.css";
 
 const Layout: FC = () => (
@@ -17,7 +18,7 @@ const Layout: FC = () => (
       </div>
     </header>
 
-    <Suspense fallback={<h1>Loading...</h1>}>
+    <Suspense fallback={<Loading />}>
       <Outlet />
     </Suspense>
 
