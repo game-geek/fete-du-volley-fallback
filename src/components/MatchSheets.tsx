@@ -13,12 +13,13 @@ const TeamLabel: FC<{ teamID: string }> = ({ teamID }) => {
     })
   );
 
-  return <span>{team.classe}</span>;
+  return <th scope="row">{team.classe}</th>;
 };
 
 const MatchSheets: FC = () => {
   const [pool, setPool] = useState({ name: "", terrain: "" });
   const [matchs, setMatchs] = useState([]);
+  const [matchsId, setMatchsId] = useState([]);
   let { id } = useParams();
 
   useEffect(() =>
@@ -30,48 +31,66 @@ const MatchSheets: FC = () => {
   useEffect(() =>
     onSnapshot(collection(db, `Poules/${id}/matchs`), (snapshot: any) => {
       setMatchs(snapshot.docs.map((doc: any) => doc.data()));
+      setMatchsId(snapshot.docs.map((doc: any) => doc.id));
     })
   );
 
   return (
     <div aria-label="index" className="container">
-      <h1>{pool.name}</h1>
+      <table aria-label="match">
+        <caption>{pool.name}</caption>
 
-      <div aria-label="match-calc" className="container">
-        <div aria-label="match-label" className="container">
-          <span id="place-label">Lieu</span>
-          <span id="time-label">heure</span>
-        </div>
-        <div aria-label="match-grid" className="container">
-          {matchs.map((match: any) => (
-            <>
-              <TeamLabel teamID={match.equipes.Equ1} />
-              <span>{pool.terrain}</span>
-              <TeamLabel teamID={match.equipes.Equ2} />
-              <span>{match.heure}</span>
-            </>
-          ))}
-        </div>
-      </div>
+        <thead aria-label="match">
+          <tr>
+            <th scope="col">Équipe 1</th>
+            <th scope="col">Lieu</th>
+            <th scope="col">Équipe 2</th>
+            <th scope="col">Heure</th>
+          </tr>
+        </thead>
 
-      <div aria-label="result-grid" className="container">
+        <tbody aria-label="match">
+          {matchs.map(
+            (match: any, i: number): JSX.Element => (
+              <tr key={matchsId[i]}>
+                <TeamLabel teamID={match.equipes.Equ1} />
+                <td>{pool.terrain}</td>
+                <TeamLabel teamID={match.equipes.Equ2} />
+                <td>{match.heure}</td>
+              </tr>
+            )
+          )}
+        </tbody>
+      </table>
+
+      <table aria-label="result">
         {
           // TODO: Manage the result grid !
         }
-        <span>1er</span>
-        <span></span>
-        <span>Qualifié</span>
+        <tbody>
+          <tr>
+            <th scope="row">1er</th>
+            <td></td>
+            <td>Qualifié</td>
+          </tr>
 
-        <span>2eme</span>
-        <span></span>
-        <span>Qualifié</span>
+          <tr>
+            <th scope="row">2eme</th>
+            <td></td>
+            <td>Qualifié</td>
+          </tr>
 
-        <span>3eme</span>
-        <span></span>
+          <tr>
+            <th scope="row">3eme</th>
+            <td></td>
+          </tr>
 
-        <span>4eme</span>
-        <span></span>
-      </div>
+          <tr>
+            <th scope="row">4eme</th>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };

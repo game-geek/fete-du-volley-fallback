@@ -14,31 +14,35 @@ const Rank: FC = () => {
 
   return (
     <div aria-label="index" className="container">
-      <div aria-label="rank-table" className="container" id="rank-table">
-        <div id="table-label">
-          <span>Équipe</span>
-          <span>Victoires</span>
-          <span>Défaites</span>
-          <span>Égalités</span>
-          <span>Points</span>
-        </div>
+      <table aria-label="rank">
+        <thead aria-label="rank">
+          <tr>
+            <th scope="col">Équipe</th>
+            <th scope="col">Victoires</th>
+            <th scope="col">Défaites</th>
+            <th scope="col">Égalités</th>
+            <th scope="col">Points</th>
+          </tr>
+        </thead>
 
-        {teams.map(
-          (team: any): JSX.Element => (
-            <Link
-              className="table-row"
-              key={team}
-              to={`match-sheet/${team.poule}`}
-            >
-              <span>{team.classe}</span>
-              <span>{team.victoires}</span>
-              <span>{team.defaites}</span>
-              <span>{team.egalites}</span>
-              <span>{team.points}</span>
-            </Link>
-          )
-        )}
-      </div>
+        <tbody>
+          {teams.map(
+            (team: any): JSX.Element => (
+              <tr key={team}>
+                <th scope="row">
+                  <Link className="table-row" to={`/match-sheet/${team.poule}`}>
+                    {team.classe}
+                  </Link>
+                </th>
+                <td>{team.victoires}</td>
+                <td>{team.defaites}</td>
+                <td>{team.egalites}</td>
+                <td>{team.points}</td>
+              </tr>
+            )
+          )}
+        </tbody>
+      </table>
     </div>
   );
 };
