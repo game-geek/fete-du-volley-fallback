@@ -5,38 +5,44 @@ import db from "../firebase";
 import "../styles/style.css";
 
 const PoolList: FC = () => {
-  const [finalState, setFinalState] = useState(0);
+  const [isFinal, setIsFinal] = useState(false);
   const [pools, setPools] = useState([]);
   const [poolsID, setPoolsID] = useState([]);
 
-  useEffect(
-    () =>
-      onSnapshot(
-        query(collection(db, "Poules"), where("terrain", "!=", "")),
-        (snapshot: any) => {
-          setPools(snapshot.docs.map((doc: any) => doc.data()));
-          setPoolsID(snapshot.docs.map((doc: any) => doc.id));
-        }
-      ),
-    []
-  );
+  useEffect(() => {
+    const unsub = onSnapshot(
+      query(collection(db, "Poules"), where("terrain", "!=", "")),
+      (snapshot: any) => {
+        setPools(snapshot.docs.map((doc: any) => doc.data()));
+        setPoolsID(snapshot.docs.map((doc: any) => doc.id));
+      }
+    );
 
-  useEffect(
-    () =>
-      onSnapshot(doc(db, "Poules", "finale"), (snapshot: any) => {
-        // TODO : get the correct state value
-        setFinalState(snapshot.data());
-      }),
-    []
-  );
+    return () => {
+      unsub();
+    };
+  }, []);
+
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, "Parametres", "etat"), (doc: any) => {
+      setIsFinal(doc.data().finale);
+    });
+
+    return () => {
+      unsub();
+    };
+  }, []);
 
   return (
     <div aria-label="index" className="container">
-      {finalState !== 0 && (
-        <div aria-label="main" className="button" id="final">
-          <Link to="/Final">Écran Final</Link>
+      {isFinal && (
+        <div aria-label="main" className="card" id="final">
+          <Link to="/Final">
+            <h3>Écran Final</h3>
+          </Link>
         </div>
       )}
+
       <div aria-label="pool-list" className="container">
         {pools.map(
           (pool: any, i: number): JSX.Element => (

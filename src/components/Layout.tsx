@@ -6,14 +6,16 @@ import "../styles/style.css";
 const Layout: FC = () => (
   <>
     <header>
-      <Link to="/" aria-label="header" className="button">
-        <img
-          src="./assets/images/ipic.png"
-          alt="accueil"
-          width="80px"
-          height="80px"
-        />
-      </Link>
+      <button aria-label="header">
+        <Link to="/">
+          <img
+            src="./assets/images/ipic.png"
+            alt="accueil"
+            width="80px"
+            height="80px"
+          />
+        </Link>
+      </button>
     </header>
 
     <Suspense fallback={<Loading />}>
@@ -26,8 +28,12 @@ const Layout: FC = () => (
         <Link to="/admin">Options Organisateurs</Link>
       </div>
       */}
-      <div aria-label="footer" className="button" id="about">
+      <button aria-label="footer" id="about">
         <a href="https://www.ipic-asso.fr/">En savoir plus sur nous</a>
+      </button>
+
+      <div className="container" aria-label="info">
+        © copyright IPIC-ASSO 2023
       </div>
     </footer>
   </>

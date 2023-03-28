@@ -1,8 +1,14 @@
 import { FC } from "react";
 
 const Loading: FC = () => (
-  <div aria-label="index" className="container">
-    <h1 id="loading">Loading...</h1>
+  <div aria-label="index" className="container" id="loading">
+    <h1 id="loading">Chargement</h1>
+    <div className="newtons-cradle">
+      <div className="newtons-cradle__dot"></div>
+      <div className="newtons-cradle__dot"></div>
+      <div className="newtons-cradle__dot"></div>
+      <div className="newtons-cradle__dot"></div>
+    </div>
   </div>
 );
 

@@ -1,17 +1,21 @@
 import { collection, doc, onSnapshot } from "firebase/firestore";
 import { FC, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import db from "../firebase";
 import "../styles/style.css";
-import { useParams } from "react-router-dom";
 
 const TeamLabel: FC<{ teamID: string }> = ({ teamID }) => {
   const [team, setTeam] = useState({ classe: "" });
 
-  useEffect(() =>
-    onSnapshot(doc(db, "Equipes", teamID), (snapshot: any) => {
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, "Equipes", teamID), (snapshot: any) => {
       setTeam(snapshot.data());
-    })
-  );
+    });
+
+    return () => {
+      unsub();
+    };
+  }, []);
 
   return <th scope="row">{team.classe}</th>;
 };
@@ -22,41 +26,45 @@ const MatchSheets: FC = () => {
   const [matchsId, setMatchsId] = useState([]);
   let { id } = useParams();
 
-  useEffect(() =>
-    onSnapshot(doc(db, "Poules", `${id}`), (snapshot: any) => {
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, "Poules", `${id}`), (snapshot: any) => {
       setPool(snapshot.data());
-    })
-  );
+    });
 
-  useEffect(() =>
-    onSnapshot(collection(db, `Poules/${id}/matchs`), (snapshot: any) => {
-      setMatchs(snapshot.docs.map((doc: any) => doc.data()));
-      setMatchsId(snapshot.docs.map((doc: any) => doc.id));
-    })
-  );
+    return () => {
+      unsub();
+    };
+  }, [id]);
+
+  useEffect(() => {
+    const unsub = onSnapshot(
+      collection(db, `Poules/${id}/matchs`),
+      (snapshot: any) => {
+        setMatchs(snapshot.docs.map((doc: any) => doc.data()));
+        setMatchsId(snapshot.docs.map((doc: any) => doc.id));
+      }
+    );
+
+    return () => {
+      unsub();
+    };
+  }, []);
 
   return (
     <div aria-label="index" className="container">
       <table aria-label="match">
-        <caption>{pool.name}</caption>
-
-        <thead aria-label="match">
-          <tr>
-            <th scope="col">Équipe 1</th>
-            <th scope="col">Lieu</th>
-            <th scope="col">Équipe 2</th>
-            <th scope="col">Heure</th>
-          </tr>
-        </thead>
+        <caption aria-label="main">{pool.name}</caption>
+        <caption aria-label="sub">Terrain : {pool.terrain}</caption>
 
         <tbody aria-label="match">
           {matchs.map(
             (match: any, i: number): JSX.Element => (
               <tr key={matchsId[i]}>
                 <TeamLabel teamID={match.equipes.Equ1} />
-                <td>{pool.terrain}</td>
+                <td>{match.score.Equ1}</td>
+                <td>-</td>
+                <td>{match.score.Equ2}</td>
                 <TeamLabel teamID={match.equipes.Equ2} />
-                <td>{match.heure}</td>
               </tr>
             )
           )}

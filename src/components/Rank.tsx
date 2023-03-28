@@ -1,16 +1,19 @@
 import { collection, onSnapshot } from "firebase/firestore";
 import { FC, useEffect, useState } from "react";
-import db from "../firebase";
 import { Link } from "react-router-dom";
+import db from "../firebase";
 
 const Rank: FC = () => {
   const [teams, setTeams] = useState([]);
 
-  useEffect(() =>
-    onSnapshot(collection(db, "Equipes"), (snapshot: any) => {
+  useEffect(() => {
+    const unsub = onSnapshot(collection(db, "Equipes"), (snapshot: any) => {
       setTeams(snapshot.docs.map((doc: any) => doc.data()));
-    })
-  );
+    });
+    return () => {
+      unsub();
+    };
+  }, []);
 
   return (
     <div aria-label="index" className="container">
