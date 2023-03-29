@@ -9,11 +9,6 @@
   --color-8: #cda76e;
   --color-9: #f99462;
   --color-10: #f77f50;
-
-  --header-h: 110px;
-  --footer-h: 78px;
-  --footer-info-h-mob: 48px;
-  --footer-h-mob: calc(var(--footer-h) + var(--footer-info-h-mob));
 }
 
 body {
