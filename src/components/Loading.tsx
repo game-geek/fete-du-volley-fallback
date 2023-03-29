@@ -1,4 +1,5 @@
 import { FC } from "react";
+import "../styles/loading.css";
 
 const Loading: FC = () => (
   <div aria-label="index" className="container" id="loading">

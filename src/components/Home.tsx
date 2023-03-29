@@ -4,11 +4,11 @@ import "../styles/style.css";
 
 const Home: FC = () => (
   <div aria-label="index" className="container">
-    <button aria-label="main" id="match-sheet">
+    <button aria-label="main">
       <Link to="/pool-list">Feuille de Match</Link>
     </button>
 
-    <button aria-label="main" id="rank">
+    <button aria-label="main">
       <Link to="/rank">Classement</Link>
     </button>
   </div>

@@ -28,7 +28,7 @@ const Layout: FC = () => (
         <Link to="/admin">Options Organisateurs</Link>
       </div>
       */}
-      <button aria-label="footer" id="about">
+      <button aria-label="footer">
         <a href="https://www.ipic-asso.fr/">En savoir plus sur nous</a>
       </button>
 
