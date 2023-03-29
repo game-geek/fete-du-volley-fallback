@@ -18,7 +18,7 @@ const TeamsList: FC<{ poolId: string }> = ({ poolId }) => {
     return () => {
       unsub();
     };
-  }, []);
+  }, [poolId]);
 
   return (
     <>
@@ -34,14 +34,14 @@ const TeamsList: FC<{ poolId: string }> = ({ poolId }) => {
 const PoolList: FC = () => {
   const [isFinal, setIsFinal] = useState(false);
   const [pools, setPools] = useState([]);
-  const [poolsID, setPoolsID] = useState([]);
+  const [poolId, setPoolsId] = useState([]);
 
   useEffect(() => {
     const unsub = onSnapshot(
       query(collection(db, "Poules"), where("terrain", "!=", "")),
       (snapshot: any) => {
         setPools(snapshot.docs.map((doc: any) => doc.data()));
-        setPoolsID(snapshot.docs.map((doc: any) => doc.id));
+        setPoolsId(snapshot.docs.map((doc: any) => doc.id));
       }
     );
 
@@ -73,11 +73,11 @@ const PoolList: FC = () => {
       <div aria-label="pool-list" className="container">
         {pools.map(
           (pool: any, i: number): JSX.Element => (
-            <div className="card" key={poolsID[i]}>
-              <Link to={`/match-sheet/${poolsID[i]}`}>
+            <div className="card" key={poolId[i]}>
+              <Link to={`/match-sheet/${poolId[i]}`}>
                 <h3>{pool.name}</h3>
                 <h4>Terrain : {pool.terrain}</h4>
-                <TeamsList poolId={poolsID[i]} />
+                <TeamsList poolId={poolId[i]} />
               </Link>
             </div>
           )

@@ -4,18 +4,18 @@ import { useParams } from "react-router-dom";
 import db from "../firebase";
 import "../styles/style.css";
 
-const TeamLabel: FC<{ teamID: string }> = ({ teamID }) => {
+const TeamLabel: FC<{ teamId: string }> = ({ teamId }) => {
   const [team, setTeam] = useState({ classe: "" });
 
   useEffect(() => {
-    const unsub = onSnapshot(doc(db, "Equipes", teamID), (snapshot: any) => {
+    const unsub = onSnapshot(doc(db, "Equipes", teamId), (snapshot: any) => {
       setTeam(snapshot.data());
     });
 
     return () => {
       unsub();
     };
-  }, []);
+  }, [teamId]);
 
   return <th scope="row">{team.classe}</th>;
 };
@@ -48,7 +48,7 @@ const MatchSheets: FC = () => {
     return () => {
       unsub();
     };
-  }, []);
+  }, [id]);
 
   return (
     <div aria-label="index" className="container">
@@ -60,11 +60,11 @@ const MatchSheets: FC = () => {
           {matchs.map(
             (match: any, i: number): JSX.Element => (
               <tr key={matchsId[i]}>
-                <TeamLabel teamID={match.equipes.Equ1} />
+                <TeamLabel teamId={match.equipes.Equ1} />
                 <td>{match.score.Equ1}</td>
                 <td>-</td>
                 <td>{match.score.Equ2}</td>
-                <TeamLabel teamID={match.equipes.Equ2} />
+                <TeamLabel teamId={match.equipes.Equ2} />
               </tr>
             )
           )}
