@@ -65,21 +65,24 @@ const MatchSheets: FC = () => {
 
         <tbody aria-label="match">
           {matchs.map(
-            (match: any, i: number): JSX.Element => (
-              <tr key={matchsId[i]}>
-                <td>{match.passage}</td>
-                <TeamLabel teamId={match.equipes.Equ1} />
-                <td>{match.score.Equ1}</td>
-                <td>-</td>
-                <td>{match.score.Equ2}</td>
-                <TeamLabel teamId={match.equipes.Equ2} />
-                {match.heure && (
-                  <td>
-                    {new Date(match.heure.seconds * 1000).toLocaleTimeString()}
-                  </td>
-                )}
-              </tr>
-            )
+            (match: any, i: number): JSX.Element =>
+              match.equipes.Equ1 &&
+              match.equipes.Equ2 && (
+                <tr key={matchsId[i]}>
+                  <TeamLabel teamId={match.equipes.Equ1} />
+                  <td>{match.score.Equ1}</td>
+                  <td>-</td>
+                  <td>{match.score.Equ2}</td>
+                  <TeamLabel teamId={match.equipes.Equ2} />
+                  {match.heure && (
+                    <td>
+                      {new Date(
+                        match.heure.seconds * 1000
+                      ).toLocaleTimeString()}
+                    </td>
+                  )}
+                </tr>
+              )
           )}
         </tbody>
       </table>
