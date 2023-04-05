@@ -1,6 +1,13 @@
 import { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { collection, doc, onSnapshot, query, where } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import db from "../firebase";
 import "../styles/style.css";
 
@@ -8,12 +15,15 @@ const TeamsList: FC<{ poolId: string }> = ({ poolId }) => {
   const [teams, setTeams] = useState([]);
 
   useEffect(() => {
-    const unsub = onSnapshot(
-      query(collection(db, "Equipes"), where("poule", "==", poolId)),
-      (snapshot: any) => {
-        setTeams(snapshot.docs.map((doc: any) => doc.data()));
-      }
+    const teamsQuery = query(
+      collection(db, "Equipes"),
+      where("poule", "==", poolId)
+      // , orderBy("classe") For some reason it doesn't work :/
     );
+
+    const unsub = onSnapshot(teamsQuery, (snapshot: any) => {
+      setTeams(snapshot.docs.map((doc: any) => doc.data()));
+    });
 
     return () => {
       unsub();
@@ -35,15 +45,13 @@ const PoolList: FC = () => {
   const [isFinal, setIsFinal] = useState(false);
   const [pools, setPools] = useState([]);
   const [poolId, setPoolsId] = useState([]);
+  const poolsQuery = query(collection(db, "Poules"), orderBy("name"));
 
   useEffect(() => {
-    const unsub = onSnapshot(
-      query(collection(db, "Poules"), where("terrain", "!=", "")),
-      (snapshot: any) => {
-        setPools(snapshot.docs.map((doc: any) => doc.data()));
-        setPoolsId(snapshot.docs.map((doc: any) => doc.id));
-      }
-    );
+    const unsub = onSnapshot(poolsQuery, (snapshot: any) => {
+      setPools(snapshot.docs.map((doc: any) => doc.data()));
+      setPoolsId(snapshot.docs.map((doc: any) => doc.id));
+    });
 
     return () => {
       unsub();
@@ -64,7 +72,7 @@ const PoolList: FC = () => {
     <div aria-label="index" className="container" id="pool-list">
       {isFinal && (
         <div aria-label="main" className="card" id="final">
-          <Link to="/Final">
+          <Link to="/final">
             <h3>Écran Final</h3>
           </Link>
         </div>

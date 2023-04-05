@@ -1,4 +1,10 @@
-import { collection, doc, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import db from "../firebase";
@@ -21,10 +27,14 @@ const TeamLabel: FC<{ teamId: string }> = ({ teamId }) => {
 };
 
 const MatchSheets: FC = () => {
+  let { id } = useParams();
   const [pool, setPool] = useState({ name: "", terrain: "" });
   const [matchs, setMatchs] = useState([]);
   const [matchsId, setMatchsId] = useState([]);
-  let { id } = useParams();
+  const matchsQuery = query(
+    collection(db, `Poules/${id}/matchs`),
+    orderBy("passage")
+  );
 
   useEffect(() => {
     const unsub = onSnapshot(doc(db, "Poules", `${id}`), (snapshot: any) => {
@@ -37,13 +47,11 @@ const MatchSheets: FC = () => {
   }, [id]);
 
   useEffect(() => {
-    const unsub = onSnapshot(
-      collection(db, `Poules/${id}/matchs`),
-      (snapshot: any) => {
-        setMatchs(snapshot.docs.map((doc: any) => doc.data()));
-        setMatchsId(snapshot.docs.map((doc: any) => doc.id));
-      }
-    );
+    const unsub = onSnapshot(matchsQuery, (snapshot: any) => {
+      snapshot.docs.sort();
+      setMatchs(snapshot.docs.map((doc: any) => doc.data()));
+      setMatchsId(snapshot.docs.map((doc: any) => doc.id));
+    });
 
     return () => {
       unsub();
@@ -65,6 +73,7 @@ const MatchSheets: FC = () => {
                 <td>-</td>
                 <td>{match.score.Equ2}</td>
                 <TeamLabel teamId={match.equipes.Equ2} />
+                <td>{match.heure}</td>
               </tr>
             )
           )}

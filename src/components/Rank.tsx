@@ -1,14 +1,17 @@
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import db from "../firebase";
 
 const Rank: FC = () => {
   const [teams, setTeams] = useState([]);
+  const [teamsId, setTeamsId] = useState([]);
+  const teamsQuery = query(collection(db, "Equipes"), orderBy("classe"));
 
   useEffect(() => {
-    const unsub = onSnapshot(collection(db, "Equipes"), (snapshot: any) => {
+    const unsub = onSnapshot(teamsQuery, (snapshot: any) => {
       setTeams(snapshot.docs.map((doc: any) => doc.data()));
+      setTeamsId(snapshot.docs.map((doc: any) => doc.id));
     });
     return () => {
       unsub();
@@ -30,8 +33,8 @@ const Rank: FC = () => {
 
         <tbody>
           {teams.map(
-            (team: any): JSX.Element => (
-              <tr key={team}>
+            (team: any, i: number): JSX.Element => (
+              <tr key={teamsId[i]}>
                 <th scope="row">
                   <Link className="table-row" to={`/match-sheet/${team.poule}`}>
                     {team.classe}

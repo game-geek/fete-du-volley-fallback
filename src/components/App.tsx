@@ -2,7 +2,6 @@ import { FC, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
 import Home from "./Home";
-import Loading from "./Loading";
 
 const PoolList = lazy(() => import("./PoolList"));
 const Rank = lazy(() => import("./Rank"));
@@ -19,7 +18,6 @@ const App: FC = () => (
         <Route path="rank" element={<Rank />} />
         <Route path="match-sheet/:id" element={<MatchSheet />} />
         <Route path="final" element={<Final />} />
-        <Route path="loading" element={<Loading />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Routes>

@@ -92,6 +92,7 @@ table {
   border: 5px solid var(--color-1);
   border-radius: 1rem;
   margin: 2rem;
+  overflow-x: scroll;
   table-layout: fixed;
   padding: 1rem;
   width: auto;
@@ -127,15 +128,10 @@ th[scope="col"] {
 
 .container[aria-label="index"] {
   min-height: calc(100vh - 188px);
-  overflow-x: scroll;
 }
 
 .container[aria-label="index"]#loading {
   grid-template-rows: 40% 5% 45%;
-}
-
-.container[aria-label="index"]#pool-list {
-  overflow-x: hidden;
 }
 
 .container[aria-label="info"] {
@@ -151,7 +147,7 @@ th[scope="col"] {
 }
 
 .container[aria-label="pool-list"] {
-  grid-template-columns: 50vw 50vw;
+  grid-template-columns: 45vw 45vw;
 }
 
 .form-element {

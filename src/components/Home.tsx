@@ -2,6 +2,7 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 import "../styles/style.css";
 
+// TODO : Add a timer before the start of the "party"
 const Home: FC = () => (
   <div aria-label="index" className="container">
     <button aria-label="main">

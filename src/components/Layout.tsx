@@ -9,7 +9,7 @@ const Layout: FC = () => (
       <button aria-label="header">
         <Link to="/">
           <img
-            src="./assets/images/ipic.png"
+            src="./assets/images/logo.png"
             alt="accueil"
             width="80px"
             height="80px"
