@@ -1,5 +1,3 @@
-import { FC, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import {
   collection,
   doc,
@@ -8,19 +6,20 @@ import {
   query,
   where,
 } from "firebase/firestore";
+import { FC, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import db from "../firebase";
 import "../styles/style.css";
 
 const TeamsList: FC<{ poolId: string }> = ({ poolId }) => {
   const [teams, setTeams] = useState([]);
+  const teamsQuery = query(
+    collection(db, "Equipes"),
+    where("poule", "==", poolId)
+    // , orderBy("classe") // For some reason it doesn't work :/
+  );
 
   useEffect(() => {
-    const teamsQuery = query(
-      collection(db, "Equipes"),
-      where("poule", "==", poolId)
-      // , orderBy("classe") For some reason it doesn't work :/
-    );
-
     const unsub = onSnapshot(teamsQuery, (snapshot: any) => {
       setTeams(snapshot.docs.map((doc: any) => doc.data()));
     });

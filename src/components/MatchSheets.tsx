@@ -48,7 +48,6 @@ const MatchSheets: FC = () => {
 
   useEffect(() => {
     const unsub = onSnapshot(matchsQuery, (snapshot: any) => {
-      snapshot.docs.sort();
       setMatchs(snapshot.docs.map((doc: any) => doc.data()));
       setMatchsId(snapshot.docs.map((doc: any) => doc.id));
     });
@@ -56,7 +55,7 @@ const MatchSheets: FC = () => {
     return () => {
       unsub();
     };
-  }, [id]);
+  }, [id, matchsQuery]);
 
   return (
     <div aria-label="index" className="container">
@@ -68,12 +67,17 @@ const MatchSheets: FC = () => {
           {matchs.map(
             (match: any, i: number): JSX.Element => (
               <tr key={matchsId[i]}>
+                <td>{match.passage}</td>
                 <TeamLabel teamId={match.equipes.Equ1} />
                 <td>{match.score.Equ1}</td>
                 <td>-</td>
                 <td>{match.score.Equ2}</td>
                 <TeamLabel teamId={match.equipes.Equ2} />
-                <td>{match.heure}</td>
+                {match.heure && (
+                  <td>
+                    {new Date(match.heure.seconds * 1000).toLocaleTimeString()}
+                  </td>
+                )}
               </tr>
             )
           )}
