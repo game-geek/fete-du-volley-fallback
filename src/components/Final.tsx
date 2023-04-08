@@ -1,5 +1,5 @@
 import React, { FC, Suspense, useState } from "react";
-import { MatchSheets } from "./MatchSheets";
+import { MatchSheet } from "./MatchSheet";
 import Loading from "./Loading";
 
 const Final: FC = () => {
@@ -40,7 +40,7 @@ const Final: FC = () => {
 
       <div aria-label="tab" className="container">
         <Suspense fallback={<Loading />}>
-          <MatchSheets id={activeTab} />
+          <MatchSheet id={activeTab} />
         </Suspense>
       </div>
     </div>

@@ -26,7 +26,7 @@ const TeamLabel: FC<{ teamId: string }> = ({ teamId }) => {
   return <th scope="row">{team.classe}</th>;
 };
 
-export const MatchSheets: FC<{ id: any }> = ({ id }) => {
+export const MatchSheet: FC<{ id: any }> = ({ id }) => {
   const [pool, setPool] = useState({ name: "", terrain: "" });
   const [matchs, setMatchs] = useState([]);
   const [matchsId, setMatchsId] = useState([]);
@@ -121,15 +121,15 @@ export const MatchSheets: FC<{ id: any }> = ({ id }) => {
   );
 };
 
-const MatchSheetsPage: FC = () => {
+const MatchSheetPage: FC = () => {
   const { id } = useParams();
 
   return (
     <div aria-label="index" className="container">
-      <MatchSheets id={id} />
+      <MatchSheet id={id} />
     </div>
   );
 };
 
-export default MatchSheetsPage;
+export default MatchSheetPage;
 

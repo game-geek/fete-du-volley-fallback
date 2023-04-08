@@ -5,7 +5,7 @@ import Home from "./Home";
 
 const PoolList = lazy(() => import("./PoolList"));
 const Rank = lazy(() => import("./Rank"));
-const MatchSheetsPage = lazy(() => import("./MatchSheets"));
+const MatchSheetPage = lazy(() => import("./MatchSheet"));
 const Final = lazy(() => import("./Final"));
 const PageNotFound = lazy(() => import("./PageNotFound"));
 
@@ -16,7 +16,7 @@ const App: FC = () => (
         <Route index element={<Home />} />
         <Route path="pool-list" element={<PoolList />} />
         <Route path="rank" element={<Rank />} />
-        <Route path="match-sheet/:id" element={<MatchSheetsPage />} />
+        <Route path="match-sheet/:id" element={<MatchSheetPage />} />
         <Route path="final" element={<Final />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>

@@ -6,7 +6,7 @@ import "../styles/style.css";
 const Home: FC = () => (
   <div aria-label="index" className="container">
     <Link to="/pool-list">
-      <button aria-label="main">Feuille de Match</button>
+      <button aria-label="main">Feuilles de Matchs</button>
     </Link>
 
     <Link to="/rank">
