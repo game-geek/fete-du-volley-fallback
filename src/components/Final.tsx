@@ -40,7 +40,7 @@ const Final: FC = () => {
 
       <div aria-label="tab" className="container">
         <Suspense fallback={<Loading />}>
-          <MatchSheets id="phase1" />
+          <MatchSheets id={activeTab} />
         </Suspense>
       </div>
     </div>
