@@ -83,32 +83,26 @@ caption[aria-label="sub"] {
   margin-bottom: 3rem;
 }
 
+h1 {
+  text-decoration: underline;
+  font-size: 2.5rem;
+}
+
+h2,
+h3 {
+  font-weight: normal;
+  margin: 5px 10px;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
 h5 {
   font-style: italic;
   margin: 1rem;
   padding-left: 10px;
   text-align: left;
-}
-
-table {
-  background-color: aliceblue;
-  border: 5px solid var(--color-1);
-  border-radius: 1rem;
-  margin: 2rem 0;
-  overflow-x: scroll;
-  table-layout: fixed;
-  padding: 1rem;
-  width: auto;
-}
-
-th,
-td {
-  padding: 0.5rem 1.25rem;
-  text-align: center;
-}
-
-th[scope="col"] {
-  text-decoration: underline;
 }
 
 menu.tab-nav {
@@ -148,6 +142,50 @@ menu.tab-nav li:hover {
 
 menu.tab-nav li.selected {
   background-color: #39a2db;
+}
+
+span.underline {
+  text-decoration: underline;
+}
+
+svg.donutchart {
+  margin: 2rem 0.5rem;
+}
+
+table {
+  background-color: aliceblue;
+  border: 5px solid var(--color-1);
+  border-radius: 1rem;
+  margin: 2rem 0;
+  overflow-x: scroll;
+  table-layout: fixed;
+  padding: 1rem;
+  width: auto;
+}
+
+th[scope="col"] {
+  text-decoration: underline;
+}
+
+th,
+td {
+  padding: 0.5rem 1.25rem;
+  text-align: center;
+}
+
+ul > * {
+  padding: 5px;
+}
+
+ul li:first-child {
+  padding-top: 20px;
+}
+
+ul::before {
+  content: attr(aria-label);
+  font-size: 1.25rem;
+  margin-left: -3rem;
+  text-decoration: underline;
 }
 
 .card {
@@ -211,12 +249,24 @@ menu.tab-nav li.selected {
   text-align: center;
 }
 
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 10px;
+}
+
 @media only screen and (max-width: 864px) {
   footer {
     align-items: center;
     grid-template-columns: 100%;
     height: 126px;
     justify-items: center;
+  }
+
+  svg.donutchart {
+    height: 400px !important;
+    width: 600px !important;
   }
 
   .container[aria-label="index"] {
@@ -229,27 +279,41 @@ menu.tab-nav li.selected {
 }
 
 @media only screen and (max-width: 624px) {
-  .container[aria-label="pool-list"] {
-    grid-template-columns: 100vw;
-  }
-
-  table[aria-label="match"] th {
-    padding: 0.5rem 0.75rem;
+  svg.donutchart {
+    height: 327px !important;
+    width: 490px !important;
   }
 
   table[aria-label="match"] td {
     padding: 0.5rem 0.25rem;
   }
 
-  table[aria-label="rank"] th,
-  td {
+  table[aria-label="match"] th {
     padding: 0.5rem 0.75rem;
+  }
+
+  table[aria-label="rank"] td,
+  th {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .container[aria-label="pool-list"] {
+    grid-template-columns: 100vw;
+  }
+
+  .title {
+    font-size: 2rem;
   }
 }
 
 @media only screen and (max-width: 512px) {
-  table[aria-label="rank"] th,
-  td {
+  svg.donutchart {
+    height: 180px !important;
+    width: 270px !important;
+  }
+
+  table[aria-label="rank"] td,
+  th {
     padding: 0.5rem 0.125rem;
   }
 }

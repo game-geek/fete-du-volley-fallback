@@ -7,6 +7,7 @@ const PoolList = lazy(() => import("./PoolList"));
 const Rank = lazy(() => import("./Rank"));
 const MatchSheetPage = lazy(() => import("./MatchSheet"));
 const Final = lazy(() => import("./Final"));
+const TeamStats = lazy(() => import("./TeamStats"));
 const PageNotFound = lazy(() => import("./PageNotFound"));
 
 const App: FC = () => (
@@ -18,6 +19,7 @@ const App: FC = () => (
         <Route path="rank" element={<Rank />} />
         <Route path="match-sheet/:id" element={<MatchSheetPage />} />
         <Route path="final" element={<Final />} />
+        <Route path="team-stats/:teamId" element={<TeamStats />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Routes>

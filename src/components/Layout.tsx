@@ -28,7 +28,9 @@ const Layout: FC = () => (
       </a>
 
       <div className="container" aria-label="info">
-        © copyright IPIC-ASSO 2023
+        <span>
+          <span>&#169;</span> copyright IPIC-ASSO 2023
+        </span>
       </div>
     </footer>
   </>

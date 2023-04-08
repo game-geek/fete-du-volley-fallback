@@ -6,7 +6,7 @@ import {
   query,
 } from "firebase/firestore";
 import { FC, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import db from "../firebase";
 import "../styles/style.css";
 
@@ -23,7 +23,11 @@ const TeamLabel: FC<{ teamId: string }> = ({ teamId }) => {
     };
   }, [teamId]);
 
-  return <th scope="row">{team.classe}</th>;
+  return (
+    <Link to={`/team-stats/${teamId}`}>
+      <th scope="row">{team.classe}</th>
+    </Link>
+  );
 };
 
 export const MatchSheet: FC<{ id: any }> = ({ id }) => {
