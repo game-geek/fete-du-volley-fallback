@@ -16,12 +16,12 @@ const Rank: FC = () => {
     return () => {
       unsub();
     };
-  }, []);
+  }, [teamsQuery]);
 
   return (
     <div aria-label="index" className="container">
       <table aria-label="rank">
-        <thead aria-label="rank">
+        <thead>
           <tr>
             <th scope="col">Équipe</th>
             <th scope="col">Victoires</th>

@@ -16,7 +16,7 @@ const TeamsList: FC<{ poolId: string }> = ({ poolId }) => {
   const teamsQuery = query(
     collection(db, "Equipes"),
     where("poule", "==", poolId)
-    // , orderBy("classe") // For some reason it doesn't work :/
+    // orderBy("classe") // For some reason it doesn't work :/
   );
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const TeamsList: FC<{ poolId: string }> = ({ poolId }) => {
     return () => {
       unsub();
     };
-  }, [poolId]);
+  }, [poolId, teamsQuery]);
 
   return (
     <>
@@ -55,7 +55,7 @@ const PoolList: FC = () => {
     return () => {
       unsub();
     };
-  }, []);
+  }, [poolsQuery]);
 
   useEffect(() => {
     const unsub = onSnapshot(doc(db, "Parametres", "etat"), (doc: any) => {
@@ -70,23 +70,23 @@ const PoolList: FC = () => {
   return (
     <div aria-label="index" className="container" id="pool-list">
       {isFinal && (
-        <div aria-label="main" className="card" id="final">
-          <Link to="/final">
+        <Link to="/final">
+          <div aria-label="main" role="button" className="card" id="final">
             <h3>Écran Final</h3>
-          </Link>
-        </div>
+          </div>
+        </Link>
       )}
 
       <div aria-label="pool-list" className="container">
         {pools.map(
           (pool: any, i: number): JSX.Element => (
-            <div className="card" key={poolId[i]}>
-              <Link to={`/match-sheet/${poolId[i]}`}>
+            <Link to={`/match-sheet/${poolId[i]}`} key={poolId[i]}>
+              <div className="card" role="button">
                 <h3>{pool.name}</h3>
                 <h4>Terrain : {pool.terrain}</h4>
                 <TeamsList poolId={poolId[i]} />
-              </Link>
-            </div>
+              </div>
+            </Link>
           )
         )}
       </div>

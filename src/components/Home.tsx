@@ -5,13 +5,13 @@ import "../styles/style.css";
 // TODO : Add a timer before the start of the "party"
 const Home: FC = () => (
   <div aria-label="index" className="container">
-    <button aria-label="main">
-      <Link to="/pool-list">Feuille de Match</Link>
-    </button>
+    <Link to="/pool-list">
+      <button aria-label="main">Feuille de Match</button>
+    </Link>
 
-    <button aria-label="main">
-      <Link to="/rank">Classement</Link>
-    </button>
+    <Link to="/rank">
+      <button aria-label="main">Classement</button>
+    </Link>
   </div>
 );
 

@@ -26,8 +26,7 @@ const TeamLabel: FC<{ teamId: string }> = ({ teamId }) => {
   return <th scope="row">{team.classe}</th>;
 };
 
-const MatchSheets: FC = () => {
-  let { id } = useParams();
+export const MatchSheets: FC<{ id: any }> = ({ id }) => {
   const [pool, setPool] = useState({ name: "", terrain: "" });
   const [matchs, setMatchs] = useState([]);
   const [matchsId, setMatchsId] = useState([]);
@@ -58,10 +57,13 @@ const MatchSheets: FC = () => {
   }, [id, matchsQuery]);
 
   return (
-    <div aria-label="index" className="container">
+    <>
       <table aria-label="match">
-        <caption aria-label="main">{pool.name}</caption>
-        <caption aria-label="sub">Terrain : {pool.terrain}</caption>
+        {pool.name && <caption aria-label="main">{pool.name}</caption>}
+
+        {pool.terrain && (
+          <caption aria-label="sub">Terrain : {pool.terrain}</caption>
+        )}
 
         <tbody aria-label="match">
           {matchs.map(
@@ -87,37 +89,47 @@ const MatchSheets: FC = () => {
         </tbody>
       </table>
 
-      <table aria-label="result">
-        {
+      {/*
+        <table aria-label="result">
           // TODO: Manage the result grid !
-        }
-        <tbody>
-          <tr>
-            <th scope="row">1er</th>
-            <td></td>
-            <td>Qualifié</td>
-          </tr>
+          <tbody>
+            <tr>
+              <th scope="row">1er</th>
+              <td></td>
+              <td>Qualifié</td>
+            </tr>
 
-          <tr>
-            <th scope="row">2eme</th>
-            <td></td>
-            <td>Qualifié</td>
-          </tr>
+            <tr>
+              <th scope="row">2eme</th>
+              <td></td>
+              <td>Qualifié</td>
+            </tr>
 
-          <tr>
-            <th scope="row">3eme</th>
-            <td></td>
-          </tr>
+            <tr>
+              <th scope="row">3eme</th>
+              <td></td>
+            </tr>
 
-          <tr>
-            <th scope="row">4eme</th>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
+            <tr>
+              <th scope="row">4eme</th>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+                      */}
+    </>
+  );
+};
+
+const MatchSheetsPage: FC = () => {
+  const { id } = useParams();
+
+  return (
+    <div aria-label="index" className="container">
+      <MatchSheets id={id} />
     </div>
   );
 };
 
-export default MatchSheets;
+export default MatchSheetsPage;
 

@@ -12,9 +12,11 @@
 }
 
 body {
+  background-color: var(--color-5);
+  box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
-  background-color: var(--color-5);
+  padding: 0;
 }
 
 header {
@@ -66,6 +68,7 @@ button[aria-label="main"] {
 button[aria-label="header"] {
   border-color: var(--color-1);
   background-color: var(--color-2);
+  padding: 5px;
 }
 
 caption {
@@ -91,7 +94,7 @@ table {
   background-color: aliceblue;
   border: 5px solid var(--color-1);
   border-radius: 1rem;
-  margin: 2rem;
+  margin: 2rem 0;
   overflow-x: scroll;
   table-layout: fixed;
   padding: 1rem;
@@ -106,6 +109,45 @@ td {
 
 th[scope="col"] {
   text-decoration: underline;
+}
+
+menu.tab-nav {
+  align-items: center;
+  border: 5px solid #39a2db;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem auto;
+  padding-left: 0px;
+  width: 60%;
+}
+
+menu.tab-nav li {
+  border-radius: 0;
+  cursor: pointer;
+  list-style: none;
+  padding: 1rem;
+  text-align: center;
+  transition: all 0.7s;
+  width: 50%;
+}
+
+menu.tab-nav li:first-child {
+  border-bottom-left-radius: 2rem;
+  border-top-left-radius: 2rem;
+}
+
+menu.tab-nav li:last-child {
+  border-bottom-right-radius: 2rem;
+  border-top-right-radius: 2rem;
+}
+
+menu.tab-nav li:hover {
+  background-color: rgba(50, 224, 196, 0.15);
+}
+
+menu.tab-nav li.selected {
+  background-color: #39a2db;
 }
 
 .card {
@@ -150,8 +192,23 @@ th[scope="col"] {
   grid-template-columns: 45vw 45vw;
 }
 
+.container[aria-label="tab"] {
+  background: #053742;
+  border-radius: 2rem;
+  height: auto;
+  margin-bottom: 2rem;
+  min-height: 400px;
+  padding: 2rem 1rem;
+  width: 80%;
+}
+
 .form-element {
   margin: 1rem 0;
+}
+
+.tab {
+  font-size: 2rem;
+  text-align: center;
 }
 
 @media only screen and (max-width: 864px) {
@@ -175,11 +232,35 @@ th[scope="col"] {
   .container[aria-label="pool-list"] {
     grid-template-columns: 100vw;
   }
+
+  table[aria-label="match"] th {
+    padding: 0.5rem 0.75rem;
+  }
+
+  table[aria-label="match"] td {
+    padding: 0.5rem 0.25rem;
+  }
+
+  table[aria-label="rank"] th,
+  td {
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+@media only screen and (max-width: 512px) {
+  table[aria-label="rank"] th,
+  td {
+    padding: 0.5rem 0.125rem;
+  }
 }
 
 @media only screen and (max-width: 296px) {
   footer {
     height: 144px;
+  }
+
+  .card {
+    padding: 1rem 0;
   }
 
   .container[aria-label="index"] {
