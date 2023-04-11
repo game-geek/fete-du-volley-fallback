@@ -34,10 +34,14 @@ export const MatchSheet: FC<{ id: any }> = ({ id }) => {
   const [pool, setPool] = useState({ name: "", terrain: "" });
   const [matchs, setMatchs] = useState([]);
   const [matchsId, setMatchsId] = useState([]);
-  const matchsQuery = query(
-    collection(db, `Poules/${id}/matchs`),
-    orderBy("passage")
-  );
+  const matchsQuery =
+    id === "phase2"
+      ? query(
+          collection(db, `Poules/${id}/matchs`),
+          orderBy("passage"),
+          orderBy("groupe")
+        )
+      : query(collection(db, `Poules/${id}/matchs`), orderBy("passage"));
 
   useEffect(() => {
     const unsub = onSnapshot(doc(db, "Poules", `${id}`), (snapshot: any) => {
@@ -93,9 +97,8 @@ export const MatchSheet: FC<{ id: any }> = ({ id }) => {
         </tbody>
       </table>
 
-      {/*
+      {/* // TODO: Manage the result grid !
         <table aria-label="result">
-          // TODO: Manage the result grid !
           <tbody>
             <tr>
               <th scope="row">1er</th>

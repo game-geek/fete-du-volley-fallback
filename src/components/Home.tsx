@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import db from "../firebase";
 import "../styles/style.css";
 
-// TODO : Add a timer before the start of the "party"
 const Home: FC = () => {
   const [actualDate, setActualDate] = useState(new Date());
   const [startDate, setStartDate] = useState(actualDate);
