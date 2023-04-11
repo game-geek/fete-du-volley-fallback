@@ -24,9 +24,9 @@ const TeamLabel: FC<{ teamId: string }> = ({ teamId }) => {
   }, [teamId]);
 
   return (
-    <Link to={`/team-stats/${teamId}`}>
-      <th scope="row">{team.classe}</th>
-    </Link>
+    <th scope="row">
+      <Link to={`/team-stats/${teamId}`}>{team.classe}</Link>
+    </th>
   );
 };
 

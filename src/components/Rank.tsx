@@ -35,9 +35,9 @@ const Rank: FC = () => {
           {teams.map(
             (team: any, i: number): JSX.Element => (
               <tr key={teamsId[i]}>
-                <Link to={`/team-stats/${teamsId[i]}`}>
-                  <th scope="row">{team.classe}</th>
-                </Link>
+                <th scope="row">
+                  <Link to={`/team-stats/${teamsId[i]}`}>{team.classe}</Link>
+                </th>
                 <td>{team.victoires}</td>
                 <td>{team.defaites}</td>
                 <td>{team.egalites}</td>

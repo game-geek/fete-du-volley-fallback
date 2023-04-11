@@ -105,6 +105,10 @@ h5 {
   text-align: left;
 }
 
+button img {
+  border-radius: 40px;
+}
+
 menu.tab-nav {
   align-items: center;
   border: 5px solid #39a2db;
