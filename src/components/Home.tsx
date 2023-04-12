@@ -21,7 +21,6 @@ const Home: FC = () => {
 
   useEffect(() => {
     getStartDate();
-    console.log("start date called");
   }, []);
 
   useEffect(() => {

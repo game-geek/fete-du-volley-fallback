@@ -112,7 +112,7 @@ button img {
 menu.tab-nav {
   align-items: center;
   border: 5px solid #39a2db;
-  border-radius: 2rem;
+  border-radius: 4rem;
   display: flex;
   justify-content: space-between;
   margin: 2rem auto;
