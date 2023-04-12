@@ -1,4 +1,4 @@
-import { doc, onSnapshot } from "firebase/firestore";
+import { SnapshotOptions, doc, getDoc } from "firebase/firestore";
 import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import db from "../firebase";
@@ -16,22 +16,54 @@ const TeamPattern = {
   victoires: 0,
 };
 
+const teamConverter = {
+  toFirestore: (team: any) => {
+    return {
+      arbitre: team.arbitre,
+      capitaine: team.capitaine,
+      classe: team.classe,
+      defaites: team.defaites,
+      devise: team.devise,
+      egalites: team.egalites,
+      nom_participant: team.nom_participant,
+      points: team.points,
+      victoires: team.victoires,
+    };
+  },
+  fromFirestore: (snapshot: any, options: SnapshotOptions) => {
+    const data = snapshot.data(options);
+    return {
+      arbitre: data.arbitre,
+      capitaine: data.capitaine,
+      classe: data.classe,
+      defaites: data.defaites,
+      devise: data.devise,
+      egalites: data.egalites,
+      nom_participant: data.nom_participant,
+      points: data.points,
+      victoires: data.victoires,
+    };
+  },
+};
+
 const TeamStats: FC = () => {
   const { teamId } = useParams();
   const [team, setTeam] = useState(TeamPattern);
 
-  useEffect(() => {
-    const unsub = onSnapshot(
-      doc(db, "Equipes", `${teamId}`),
-      (snapshot: any) => {
-        setTeam(snapshot.data());
-      }
-    );
+  const getTeamData = async () => {
+    const docRef = doc(db, "Equipes", `${teamId}`).withConverter(teamConverter);
+    const docSnap = await getDoc(docRef);
 
-    return () => {
-      unsub();
-    };
-  }, [teamId]);
+    if (docSnap.exists()) {
+      setTeam(docSnap.data());
+    } else {
+      console.log("Team data not found");
+    }
+  };
+
+  useEffect(() => {
+    getTeamData();
+  }, []);
 
   return (
     <div aria-label="index" className="container">
