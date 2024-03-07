@@ -16,7 +16,7 @@ const Rank: FC = () => {
     return () => {
       unsub();
     };
-  }, [teamsQuery]);
+  }, []);
 
   return (
     <div aria-label="index" className="container">

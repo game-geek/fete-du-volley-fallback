@@ -22,12 +22,12 @@ const TeamsList: FC<{ poolId: string }> = ({ poolId }) => {
   useEffect(() => {
     const unsub = onSnapshot(teamsQuery, (snapshot: any) => {
       setTeams(snapshot.docs.map((doc: any) => doc.data()));
-    });
+    }); 
 
     return () => {
       unsub();
     };
-  }, [poolId, teamsQuery]);
+  }, [poolId]);
 
   return (
     <>
@@ -50,16 +50,18 @@ const PoolList: FC = () => {
     const unsub = onSnapshot(poolsQuery, (snapshot: any) => {
       setPools(snapshot.docs.map((doc: any) => doc.data()));
       setPoolsId(snapshot.docs.map((doc: any) => doc.id));
+      console.log("DATA")
     });
 
     return () => {
       unsub();
     };
-  }, [poolsQuery]);
+  }, []);
 
   useEffect(() => {
     const unsub = onSnapshot(doc(db, "Parametres", "etat"), (doc: any) => {
       setIsFinal(doc.data().finale);
+      console.log("DATA2")
     });
 
     return () => {

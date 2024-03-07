@@ -62,7 +62,7 @@ export const MatchSheet: FC<{ id: any }> = ({ id }) => {
     return () => {
       unsub();
     };
-  }, [id, matchsQuery]);
+  }, [id]);
 
   return (
     <>
